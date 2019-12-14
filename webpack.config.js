@@ -2,10 +2,12 @@ const path = require('path');
 const copy = require('copy-webpack-plugin');
 const uglify = require('uglifyjs-webpack-plugin');
 const Extract = require('mini-css-extract-plugin');
+const Terser = require('terser-webpack-plugin');
+
 
 module.exports = env => {
     const dev = !(env && env.production);
-    const output = './dist';
+    const output = './@dist';
 
     return {
         mode: dev ? 'development' : 'production',
@@ -29,6 +31,7 @@ module.exports = env => {
         output: {
             path: path.join(__dirname, output),
             filename: 'js/[name].min.js',
+            chunkFilename: 'js/[name].chunk.min.js',
             publicPath: '/'
         },
         module: {
@@ -36,15 +39,7 @@ module.exports = env => {
                 {
                     exclude: /node_modules/,
                     test: /\.tsx?$/,
-                    loader: 'awesome-typescript-loader',
-                    options: {
-                        useCache: true,
-                        useBabel: true,
-                        babelOptions: {
-                            babelrc: false,
-                            plugins: ['react-hot-loader/babel']
-                        }
-                    }
+                    loader: 'babel-loader'
                 },
                 {
                     test: /\.(png|jpe?g|gif)$/,
@@ -64,7 +59,12 @@ module.exports = env => {
                 }
             ]
         },
-
+        optimization: {
+            minimize: true,
+            minimizer: dev ? [] : [
+                new Terser()
+            ],
+        },
         plugins: [
             // common plugin dev and production
             new copy([
@@ -72,24 +72,6 @@ module.exports = env => {
                 { from: 'assets/img/favicon.png', to: path.join(__dirname, output) },
             ]),
             new Extract({ filename: 'css/[name].css', publicPath: '/' })
-        ].concat(
-            dev ? [
-
-            ]: [
-                // Plugins that apply in production builds only
-                new uglify({
-                    uglifyOptions: {
-                        warnings: false,
-                        compress: {},
-                        keep_classnames: true,
-                        keep_fnames: true,
-                        output: {
-                            comments: false
-                        }
-                    },
-                    sourceMap: false
-                })
-            ]
-        )
+        ]
     };
 };

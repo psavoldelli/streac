@@ -9,6 +9,8 @@
     ]
   },
   "rules": {
+    "indent": [true, "spaces", 4],
+    "whitespace": [true, "check-module"],
     "max-line-length": {
       "options": [
         0
@@ -18,6 +20,7 @@
       true,
       "never-prefix"
     ],
+    "no-trailing-whitespace": true,
     "trailing-comma": [
       true,
       {
@@ -30,7 +33,7 @@
         }
       }
     ],
-    "jsx-curly-spacing": "always",
+    "jsx-curly-spacing": [true, "always"],
     "import-spacing": false,
     "jsx-no-multiline-js": false,
     "jsx-boolean-value": false,
