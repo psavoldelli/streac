@@ -3,7 +3,7 @@
 		"src", "@types"
 	],
     "compilerOptions": {
-        "noEmit": false,
+        "noEmit": true,
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
