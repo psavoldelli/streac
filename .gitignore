@@ -1,7 +1,7 @@
 #dist
 dist
 node_modules
-
+.vscode/chrome
 
 # Logs
 logs
