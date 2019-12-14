@@ -1,0 +1,51 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  },
+  "rules": {
+    "max-line-length": {
+      "options": [
+        0
+      ]
+    },
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "singleline": "never",
+        "multiline": {
+          "objects": "never",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        }
+      }
+    ],
+    "jsx-curly-spacing": "always",
+    "import-spacing": false,
+    "jsx-no-multiline-js": false,
+    "jsx-boolean-value": false,
+    "member-access": false,
+    "jsx-no-lambda": false,
+    "jsx-alignment": false,
+    "no-empty-interface": false,
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "variable-name": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "jsx-no-string-ref": false
+  }
+}
