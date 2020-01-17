@@ -6,8 +6,8 @@ Very simple typescript react starter project including
 - Webpack 
 - React Hot Loader
 - Vscode integration
-- Reach router with Loadable
-- styled-component and styled-system
+- Antd simple implementation
+
 ## Project structure
 
 ## Usage 

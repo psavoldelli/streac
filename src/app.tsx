@@ -1,14 +1,11 @@
-import * as React from 'react';
-import { Router } from '@reach/router';
-import Loadable from 'react-loadable';
+import * as React   from 'react';
+import { Router }   from '@reach/router';
+import Loadable     from 'react-loadable';
+import Navbar       from '@components/navbar/Navbar';
+import Home         from '@components/home/Home';
+import NotFound     from '@components/error/NotFound';
 
-import Theme from './theme';
-
-import Navbar from '@components/navbar/Navbar';
-import Content from '@components/layout/Content';
-import Home from '@components/home/Home';
-import NotFound from '@components/error/NotFound';
-import Layout from '@components/layout/Layout';
+import { Layout } from 'antd';
 
 const Lazy = ( loader: Promise<any> ) => {
     return Loadable({
@@ -18,27 +15,27 @@ const Lazy = ( loader: Promise<any> ) => {
     });
 };
 
-const Dashboard = Lazy( import('@components/dashboard/Dashboard') );
-const About     = Lazy( import('@components/home/About') );
+// import module component
+const $Ingredient   = Lazy( import('@components/ingredient/$Ingredient') );
+const About         = Lazy( import('@components/home/About') );
 
 const App: React.FC = () => {
-
     return (
-        <Theme>
-            <Layout>
+        <Layout>
+            <Layout.Header style={ { position: 'fixed', zIndex: 1, width: '100%' } } >
                 <Navbar />
+            </Layout.Header>
+            <Layout.Content style={ { marginTop: 64 } }>
+                <Router /*component={ Box }*/ primary={ false } >
+                    <Home path='/' />
+                    <About path='about' />
 
-                <Content >
-                    <Router>
-                        <Home path='/' />
-                        <About path='about' />
-                        <Dashboard path='dashboard' />
+                    <$Ingredient path='ingredient/*' />
 
-                        <NotFound default />
-                    </Router>
-                </Content>
-            </Layout>
-        </Theme>
+                    <NotFound default />
+                </Router>
+            </Layout.Content>
+        </Layout>
     );
 };
 

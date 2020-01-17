@@ -1,9 +1,9 @@
 import { delay, tap } from 'rxjs/operators';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
-const Fetcher = (url: string) => {
+const Fetcher = < T extends {} >(url: string) => {
 
-    const data$ = new Observable<Todo[]>((observer) => {
+    const data$ = new Observable<T[]>((observer) => {
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
